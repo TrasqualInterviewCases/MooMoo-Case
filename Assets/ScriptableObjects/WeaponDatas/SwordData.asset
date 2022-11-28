@@ -16,3 +16,4 @@ MonoBehaviour:
   ItemID: 0
   AttackDamage: 1
   AttackSpeed: 0.5
+  overrideController: {fileID: 22100000, guid: 1b68985f47d81694e81e843638a8b2cd, type: 2}

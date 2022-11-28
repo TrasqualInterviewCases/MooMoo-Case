@@ -5,6 +5,7 @@ public class PlayerSingleJoystickMovement : PlayerMovementBase
     public override void Move(Vector3 movementVector)
     {
         controller.Move(movementSpeed * movementVector.magnitude * Time.deltaTime * transform.forward);
+        ApplyGravity();
     }
 
     public override void Rotate(Vector3 lookVector)

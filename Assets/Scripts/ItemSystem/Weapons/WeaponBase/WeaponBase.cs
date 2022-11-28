@@ -4,14 +4,16 @@ using UnityEngine;
 public class WeaponBase : ItemBase
 {
     [SerializeField] private WeaponData data;
+    public WeaponData Data => data;
+
     [SerializeField] private SphereCollider detectionTrigger;
     [SerializeField] private BoxCollider bodyCollider;
 
     [SerializeField] private float reActivateTime = 1.5f;
-    WaitForSeconds reActivateWait;
-    IEnumerator reActivationCo;
+    private WaitForSeconds reActivateWait;
+    private IEnumerator reActivationCo;
 
-    Rigidbody rb;
+    private Rigidbody rb;
 
     private void Awake()
     {
@@ -44,7 +46,7 @@ public class WeaponBase : ItemBase
 
     private void StopReactivation()
     {
-        if(reActivationCo != null)
+        if (reActivationCo != null)
         {
             StopCoroutine(reActivationCo);
         }

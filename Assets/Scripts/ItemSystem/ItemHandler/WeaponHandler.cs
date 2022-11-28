@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WeaponHandler : ItemHandler<WeaponBase>
 {
-    public event Action OnWeaponEquipped;
+    public event Action<WeaponBase> OnWeaponEquipped;
     public event Action OnWeaponDropped;
 
     [SerializeField] private Transform weaponHolder;
@@ -17,7 +17,7 @@ public class WeaponHandler : ItemHandler<WeaponBase>
         currentWeapon.transform.SetParent(weaponHolder);
         currentWeapon.transform.localPosition = Vector3.zero;
         currentWeapon.transform.localRotation = Quaternion.identity;
-        OnWeaponEquipped?.Invoke();
+        OnWeaponEquipped?.Invoke(weapon);
     }
 
     public override void DropItem()

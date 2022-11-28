@@ -6,7 +6,7 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] GameObject buttons;
 
 
-    private void ActivateWeaponUI()
+    private void ActivateWeaponUI(WeaponBase weapon)
     {
         buttons.SetActive(true);
     }
