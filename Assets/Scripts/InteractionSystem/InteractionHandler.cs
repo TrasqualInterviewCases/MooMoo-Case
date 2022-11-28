@@ -7,6 +7,7 @@ public class InteractionHandler : MonoBehaviour
     public event Action OnInterectableLost;
 
     [SerializeField] private InteractionUI interactionUIPrefab;
+    [SerializeField] private Transform UIParent;
 
     [SerializeField] private float detectionRange = 3f;
 
@@ -14,7 +15,7 @@ public class InteractionHandler : MonoBehaviour
 
     private void Awake()
     {
-        var UI = Instantiate(interactionUIPrefab);
+        var UI = Instantiate(interactionUIPrefab, UIParent);
         UI.Initialize(this);
     }
 
@@ -22,6 +23,7 @@ public class InteractionHandler : MonoBehaviour
     {
         if (other.TryGetComponent(out IInteractable interactable))
         {
+            if(interactable.IsActive())
             DetectInteractable(interactable);
         }
     }
@@ -49,7 +51,10 @@ public class InteractionHandler : MonoBehaviour
     public void Interact()
     {
         if (currentInteractableObject != null)
+        {
             currentInteractableObject.Interact(this);
+            LoseInteractable();
+        }
     }
 
 #if UNITY_EDITOR
