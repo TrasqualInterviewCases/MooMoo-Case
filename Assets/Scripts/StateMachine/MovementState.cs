@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 public class MovementState : StateBase
 {
     private readonly MovementBase _movement;
@@ -22,5 +24,6 @@ public class MovementState : StateBase
     public override void ExitState()
     {
         _movement.StopMovement();
+        _anim.PlayMovementAnim(Vector3.zero);
     }
 }
