@@ -6,7 +6,6 @@ namespace Main.GamePlay.ItemSystem
     public abstract class ItemBase : MonoBehaviour, IInteractable
     {
         [field: SerializeField] public string InteractionInfoText { get; set; }
-        [SerializeField] private ParticleSystem shineParticle;
 
         protected InteractionHandler _interactor;
 

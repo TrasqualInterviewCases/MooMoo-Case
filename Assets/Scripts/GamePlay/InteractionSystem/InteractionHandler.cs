@@ -29,13 +29,12 @@ namespace Main.GamePlay.InteractionSystem
                 if (interactable.IsActive())
                 {
                     DetectInteractable(interactable);
-
-                    if (interactable is IInteractableDetectionAware)
-                    {
-                        var detectionAware = (IInteractableDetectionAware)interactable;
-                        detectionAware.GetDetected(this);
-                    }
                 }
+            }
+
+            if (other.TryGetComponent(out IDetectionAware detectionAware))
+            {
+                detectionAware.GetDetected(this);
             }
         }
 
@@ -44,11 +43,11 @@ namespace Main.GamePlay.InteractionSystem
             if (other.TryGetComponent(out IInteractable interactable))
             {
                 LoseInteractable();
-                if (interactable is IInteractableDetectionAware)
-                {
-                    var detectionAware = (IInteractableDetectionAware)interactable;
-                    detectionAware.GetUndetected();
-                }
+            }
+
+            if (other.TryGetComponent(out IDetectionAware detectionAware))
+            {
+                detectionAware.GetUndetected();
             }
         }
 

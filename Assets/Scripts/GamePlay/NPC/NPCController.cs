@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Main.GamePlay.NPC
 {
-    public class NPCController : MonoBehaviour, IInteractableDetectionAware
+    public class NPCController : MonoBehaviour, IInteractable, IDetectionAware
     {
         [SerializeField] TMP_Text talkText;
         [SerializeField] private string detectedText;
