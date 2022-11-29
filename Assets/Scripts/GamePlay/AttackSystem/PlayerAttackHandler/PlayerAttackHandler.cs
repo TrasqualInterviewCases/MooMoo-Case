@@ -14,6 +14,7 @@ namespace Main.GamePlay.AttackSystem
         private PlayerInputBase playerInput;
         private AnimationEventListener animEventListener;
 
+        private IEnumerator attackCDCo;
         private bool isOnCD;
 
         protected override void Awake()
@@ -28,7 +29,8 @@ namespace Main.GamePlay.AttackSystem
         {
             if (isOnCD || weaponHandler.CurrentWeapon == null) return;
             stateMachine.ChangeState(stateMachine.AttackState);
-            StartCoroutine(AttackCD());
+            attackCDCo = AttackCD();
+            StartCoroutine(attackCDCo);
         }
 
         private void DealDamage()
@@ -55,16 +57,26 @@ namespace Main.GamePlay.AttackSystem
             isOnCD = false;
         }
 
+        private void CancelAttack()
+        {
+            if (attackCDCo != null)
+                StopCoroutine(attackCDCo);
+            stateMachine.ChangeState(stateMachine.MovementState);
+            isOnCD = false;
+        }
+
         private void OnEnable()
         {
             playerInput.OnAttackPressed += PerformAttack;
             animEventListener.OnDamageEvent += DealDamage;
+            weaponHandler.OnWeaponDropped += CancelAttack;
         }
 
         private void OnDisable()
         {
             playerInput.OnAttackPressed -= PerformAttack;
             animEventListener.OnDamageEvent -= DealDamage;
+            weaponHandler.OnWeaponDropped -= CancelAttack;
         }
     }
 }
