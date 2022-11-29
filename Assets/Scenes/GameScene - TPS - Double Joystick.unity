@@ -322,7 +322,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 55145845}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1845082278}
+        m_TargetAssemblyTypeName: PlayerInputBase, Assembly-CSharp
+        m_MethodName: RegisterAttackButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &55145845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1100,7 +1112,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1146907198}
-  m_Layer: 0
+  - component: {fileID: 1146907199}
+  - component: {fileID: 1146907201}
+  - component: {fileID: 1146907200}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1123,6 +1138,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1146907199
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146907197}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.28
+  m_Height: 1.06
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.47, z: -0.000008508563}
+--- !u!114 &1146907200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146907197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59351da3e70375746ad9cace987c3ffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+--- !u!114 &1146907201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146907197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a1f9e8decdb3ff4cab0c442c7823c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regenerationDelay: 2
+  tickTimer: 1
+  healthAmount: 1
 --- !u!1 &1148861043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,9 +1296,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1845082273}
-        m_TargetAssemblyTypeName: WeaponHandler, Assembly-CSharp
-        m_MethodName: DropItem
+      - m_Target: {fileID: 1845082278}
+        m_TargetAssemblyTypeName: PlayerInputBase, Assembly-CSharp
+        m_MethodName: RegisterDropButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1854,6 +1911,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: dm_magic_stone
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013319481030, guid: c113a16646d78e545b89f56a4694a1ee, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4000014058492878, guid: c113a16646d78e545b89f56a4694a1ee, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1902,7 +1963,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4d4edfb28c86e894c93fa5c045a74ad8, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136000012107678084, guid: c113a16646d78e545b89f56a4694a1ee, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c113a16646d78e545b89f56a4694a1ee, type: 3}
 --- !u!4 &1471808154 stripped
 Transform:
@@ -1985,6 +2047,7 @@ GameObject:
   - component: {fileID: 1845082276}
   - component: {fileID: 1845082274}
   - component: {fileID: 1845082273}
+  - component: {fileID: 1845082279}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2096,6 +2159,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementJoystick: {fileID: 1087097576}
   lookJoystick: {fileID: 1087097574}
+--- !u!114 &1845082279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845082267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3ad866399cfe734ba914dca544d8027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &2009305892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2313,6 +2391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543121972333570989}
   - component: {fileID: 5866398500880331223}
+  - component: {fileID: 5866398500880331224}
   m_Layer: 0
   m_Name: Maria WProp J J Ong@Walking (1)
   m_TagString: Untagged
@@ -3661,6 +3740,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5866398500880331224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919400778288247063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cf7f2c420999b48bce2f4c8fd1eea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5901154194729204014
 Transform:
   m_ObjectHideFlags: 0

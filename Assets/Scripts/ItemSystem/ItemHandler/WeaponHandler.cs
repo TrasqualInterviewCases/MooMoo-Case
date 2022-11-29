@@ -8,24 +8,40 @@ public class WeaponHandler : ItemHandler<WeaponBase>
 
     [SerializeField] private Transform weaponHolder;
 
-    private WeaponBase currentWeapon;
+    private PlayerInputBase playerInput;
+    public WeaponBase CurrentWeapon { get; private set; }
+
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInputBase>();
+    }
 
     public override void PickUpItem(WeaponBase weapon)
     {
-        if (currentWeapon != null) DropItem();
-        currentWeapon = weapon;
-        currentWeapon.transform.SetParent(weaponHolder);
-        currentWeapon.transform.localPosition = Vector3.zero;
-        currentWeapon.transform.localRotation = Quaternion.identity;
+        if (CurrentWeapon != null) DropItem();
+        CurrentWeapon = weapon;
+        CurrentWeapon.transform.SetParent(weaponHolder);
+        CurrentWeapon.transform.localPosition = Vector3.zero;
+        CurrentWeapon.transform.localRotation = Quaternion.identity;
         OnWeaponEquipped?.Invoke(weapon);
     }
 
     public override void DropItem()
     {
-        if (currentWeapon == null) return;
+        if (CurrentWeapon == null) return;
 
-        currentWeapon.GetDropped();
-        currentWeapon = null;
+        CurrentWeapon.GetDropped();
+        CurrentWeapon = null;
         OnWeaponDropped?.Invoke();
+    }
+
+    private void OnEnable()
+    {
+        playerInput.OnDropPressed += DropItem;
+    }
+
+    private void OnDisable()
+    {
+        playerInput.OnDropPressed -= DropItem;
     }
 }

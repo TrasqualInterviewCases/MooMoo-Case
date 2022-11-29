@@ -44,6 +44,11 @@ public class WeaponBase : ItemBase
         StartCoroutine(reActivationCo);
     }
 
+    public float GetAttackAnimationLength()
+    {
+        return Data.overrideController.animationClips[3].length;
+    }
+
     private void StopReactivation()
     {
         if (reActivationCo != null)

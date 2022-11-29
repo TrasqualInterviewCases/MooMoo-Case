@@ -7,7 +7,8 @@ public class StateMachine : MonoBehaviour
     private MovementBase movement;
 
     //States
-    private MovementState movementState;
+    public MovementState MovementState { get; private set; }
+    public AttackState AttackState { get; private set; }
 
     private StateBase currentState;
 
@@ -22,8 +23,10 @@ public class StateMachine : MonoBehaviour
 
     private void InitializeStates()
     {
-        movementState = new MovementState(anim, input, movement);
-        currentState = movementState;
+        MovementState = new MovementState(anim, input, movement);
+        AttackState = new AttackState(anim, input, movement);
+
+        currentState = MovementState;
     }
 
     private void Update()
